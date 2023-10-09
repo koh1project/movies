@@ -13,8 +13,7 @@ export default function Home() {
           <Link
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <Text>By</Text>
             <Image
               src="/vercel.svg"
@@ -36,8 +35,7 @@ export default function Home() {
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <Text as={"h2"}>
             Docs <span>-&gt;</span>
           </Text>
@@ -48,8 +46,7 @@ export default function Home() {
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <Text as={"h2"}>
             Learn <span>-&gt;</span>
           </Text>
@@ -60,8 +57,7 @@ export default function Home() {
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <Text as={"h2"}>
             Templates <span>-&gt;</span>
           </Text>
@@ -72,8 +68,7 @@ export default function Home() {
           href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <Text as={"h2"}>
             Deploy <span>-&gt;</span>
           </Text>
