@@ -60,7 +60,8 @@ export const Card: React.FC<CardProps> = ({ title, releaseDate, id, imagePath })
               iconProps: {
                 iconName: id % 2 === 1 ? "FavoriteStar" : "FavoriteStarFill",
               },
-              onClick: (ev: any) => {
+              onClick: (ev) => {
+                ev.stopPropagation();
                 console.log("Add to favorites was clicked");
               },
               ariaLabel: "Add to favorites",
