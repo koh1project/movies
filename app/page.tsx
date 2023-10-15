@@ -1,80 +1,62 @@
 "use client";
 
-import { Image, Link, Stack, Text } from "@fluentui/react";
+import {
+  DocumentCard,
+  DocumentCardActions,
+  DocumentCardPreview,
+  DocumentCardTitle,
+  ImageFit,
+  Stack,
+  Text,
+  getTheme,
+  initializeIcons,
+} from "@fluentui/react";
 
-import styles from "./page.module.css";
+const theme = getTheme();
 
 export default function Home() {
+  initializeIcons();
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <Text block> Get started by editing&nbsp;</Text>
-        <Stack>
-          <Link
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer">
-            <Text>By</Text>
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
+    <main>
+      <Stack>
+        <DocumentCard
+          style={{ boxShadow: theme.effects.elevation16 }}
+          onClickHref="https://www.themoviedb.org/movie/337404-cruella"
+          onClickTarget="_blank"
+          role="button"
+          tabIndex={0}>
+          <DocumentCardPreview
+            previewImages={[
+              {
+                previewImageSrc:
+                  "https://www.themoviedb.org/t/p/w220_and_h330_face/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
+                imageFit: ImageFit.centerContain,
+                width: 318,
+                height: 196,
+              },
+            ]}
+          />
+          <DocumentCardTitle title="Create Next App" shouldTruncate />
+          <Stack horizontal horizontalAlign="space-between" tokens={{ childrenGap: 10 }}>
+            <Text as={"p"} block={false}>
+              Released {new Date().toLocaleDateString()}
+            </Text>
+            <DocumentCardActions
+              actions={[
+                {
+                  iconProps: {
+                    iconName: Math.random() > 0.3 ? "FavoriteStar" : "FavoriteStarFill",
+                  },
+                  onClick: (ev: any) => {
+                    console.log("Add to favorites was clicked");
+                  },
+                  ariaLabel: "Add to favorites",
+                },
+              ]}
             />
-          </Link>
-        </Stack>
-      </div>
-
-      <Stack className={styles.center}>
-        <Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} />
+          </Stack>
+        </DocumentCard>
       </Stack>
-
-      <div className={styles.grid}>
-        <Link
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer">
-          <Text as={"h2"}>
-            Docs <span>-&gt;</span>
-          </Text>
-          <Text>Find in-depth information about Next.js features and API.</Text>
-        </Link>
-
-        <Link
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer">
-          <Text as={"h2"}>
-            Learn <span>-&gt;</span>
-          </Text>
-          <Text>Learn about Next.js in an interactive course with&nbsp;quizzes!</Text>
-        </Link>
-
-        <Link
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer">
-          <Text as={"h2"}>
-            Templates <span>-&gt;</span>
-          </Text>
-          <Text>Explore the Next.js 13 playground.</Text>
-        </Link>
-
-        <Link
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer">
-          <Text as={"h2"}>
-            Deploy <span>-&gt;</span>
-          </Text>
-          <Text>Instantly deploy your Next.js site to a shareable URL with Vercel.</Text>
-        </Link>
-      </div>
     </main>
   );
 }
