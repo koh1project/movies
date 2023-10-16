@@ -1,3 +1,8 @@
+/**
+ * Lint-staged configuration file for Next.js. The Lint-staged library allows you to run scripts on staged files.
+ * @see https://nextjs.org/docs/pages/building-your-application/configuring/eslint#lint-staged
+ */
+
 const path = require("path");
 
 const buildEslintCommand = (filenames) =>
