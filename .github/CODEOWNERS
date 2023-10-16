@@ -1,0 +1,3 @@
+# These owners will be the default owners for everything in
+# the repo.Owners will be requested forreview when someone opens a pull request.
+* @kei95 @Lada496
