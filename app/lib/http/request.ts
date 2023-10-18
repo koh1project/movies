@@ -9,9 +9,15 @@ export type GetMethodParams = {
   path: string;
   headers?: { [key: string]: string };
   params?: { [key: string]: string };
+  requestInit?: RequestInit;
 };
 
-export const get = async ({ path, headers = DEFAULT_HEADERS, params }: GetMethodParams) => {
+export const get = async ({
+  path,
+  headers = DEFAULT_HEADERS,
+  params,
+  requestInit = { cache: "no-cache" },
+}: GetMethodParams) => {
   const endpoint = `${BASE_END_POINT}/${path}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
   const queryString = params && new URLSearchParams(params).toString();
 
@@ -20,5 +26,5 @@ export const get = async ({ path, headers = DEFAULT_HEADERS, params }: GetMethod
     headers,
   });
 
-  return fetch(request);
+  return fetch(request, requestInit);
 };

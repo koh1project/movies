@@ -20,7 +20,9 @@ export const fetchPopularMovies = async (
   try {
     const response = await get({
       path: PATH_MOVIES.POPULAR,
-      params,
+      params: {
+        ...params,
+      },
     });
 
     if (response.ok === false) {
