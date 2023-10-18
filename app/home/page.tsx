@@ -1,26 +1,17 @@
-"use client";
-
-import { Stack, initializeIcons } from "@fluentui/react";
+import { fetchPopularMovies } from "../lib/http/movie/movie.service";
 
 import { CardList, CardListProps } from "./component/CardList/CardList";
-import { MockPopularMovies } from "./mock";
-import { CARD_PREVIEW_IMAGE_SIZE_HEIGHT, CARD_PREVIEW_IMAGE_SIZE_WIDTH } from "./const";
+import { convertMovieResponseToCard } from "./component/utils";
 
-export default function Home() {
-  initializeIcons();
-
-  const cards: CardListProps["cards"] = MockPopularMovies.results.map((movie) => ({
-    title: movie.title,
-    imagePath: `https://www.themoviedb.org/t/p/w${CARD_PREVIEW_IMAGE_SIZE_WIDTH}_and_h${CARD_PREVIEW_IMAGE_SIZE_HEIGHT}_bestv2/${movie.poster_path}`,
-    releaseDate: movie.release_date,
-    id: movie.id,
-  }));
+export default async function Home() {
+  const movies = await fetchPopularMovies({ page: String(1) });
+  const cards: CardListProps["cards"] = convertMovieResponseToCard(movies.results);
 
   return (
     <main>
-      <Stack>
-        <CardList cards={cards} />
-      </Stack>
+      <div>
+        <CardList cards={cards} currentPage={movies.page || 0} />
+      </div>
     </main>
   );
 }

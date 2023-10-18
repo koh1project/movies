@@ -11,12 +11,14 @@ import {
 
 import { CARD_PREVIEW_IMAGE_SIZE_HEIGHT, CARD_PREVIEW_IMAGE_SIZE_WIDTH } from "../../const";
 
-export type CardProps = {
+export type CardType = {
   title: string;
   imagePath: string;
   releaseDate: string;
   id: number;
 };
+
+type CardProps = CardType;
 
 export const Card: React.FC<CardProps> = ({ title, releaseDate, id, imagePath }) => {
   const theme = getTheme();
