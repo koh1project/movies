@@ -19,6 +19,11 @@ export const get = async ({
   requestInit = { cache: "no-cache" },
 }: GetMethodParams) => {
   const endpoint = `${BASE_END_POINT}/${path}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+
+  if (endpoint === undefined) {
+    throw new Error("Endpoint is undefined");
+  }
+
   const queryString = params && new URLSearchParams(params).toString();
 
   const request = new Request(queryString ? `${endpoint}&${queryString}` : endpoint, {
