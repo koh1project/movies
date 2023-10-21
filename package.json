@@ -16,7 +16,8 @@
     "@fluentui/react": "^8.112.1",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-intersection-observer": "^9.5.2"
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.1",

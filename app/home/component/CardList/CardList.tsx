@@ -1,13 +1,13 @@
 "use client";
 
+import React from "react";
 import { Stack, initializeIcons } from "@fluentui/react";
-import React, { useCallback, useEffect } from "react";
 
 import { CardType, Card } from "../Card/Card";
 
-import { convertMovieResponseToCard } from "../utils";
+import { ShimmerCard } from "../Card/ShimmerCard";
 
-import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
+import { useMovies } from "../../hooks/useMovies";
 
 export type CardListProps = {
   cards: CardType[];
@@ -17,23 +17,7 @@ export type CardListProps = {
 export const CardList: React.FC<CardListProps> = (props) => {
   initializeIcons();
 
-  const [cards, setCards] = React.useState<CardType[]>(props.cards);
-  const [currentPage, setCurrentPage] = React.useState<number>(props.currentPage);
-
-  // Client fetch test -----------
-  const fetchOnClient_DEVELOP = useCallback(async () => {
-    const nextPage = currentPage + 1;
-    const movies = await fetchPopularMovies({ page: String(nextPage) });
-    const additionalCards = convertMovieResponseToCard(movies.results);
-
-    setCards([...cards, ...additionalCards]);
-    setCurrentPage(nextPage);
-  }, []);
-
-  useEffect(() => {
-    setTimeout(fetchOnClient_DEVELOP, 3000);
-  }, []);
-  // Client fetch test -----------
+  const { cards, ref, loading } = useMovies({ initialCards: props.cards, page: props.currentPage });
 
   return (
     <Stack
@@ -44,15 +28,24 @@ export const CardList: React.FC<CardListProps> = (props) => {
         childrenGap: 20,
       }}
     >
-      {cards.map((card) => (
+      {cards.map((card, idx) => (
         <Card
-          key={card.id}
+          key={`${card.id}-${idx}`}
           title={card.title}
           imagePath={card.imagePath}
           releaseDate={card.releaseDate}
           id={card.id}
+          inViewRef={idx === cards.length - 1 ? ref : undefined}
         />
       ))}
+
+      {loading && (
+        <>
+          <ShimmerCard />
+          <ShimmerCard />
+          <ShimmerCard />
+        </>
+      )}
     </Stack>
   );
 };
