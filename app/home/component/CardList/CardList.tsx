@@ -7,7 +7,7 @@ import { CardType, Card } from "../Card/Card";
 
 import { ShimmerCard } from "../Card/ShimmerCard";
 
-import { useMovies } from "../../hooks/useMovies";
+import { REQUEST_STATE_TYPES, useMovies } from "../../hooks/useMovies";
 
 export type CardListProps = {
   cards: CardType[];
@@ -17,7 +17,10 @@ export type CardListProps = {
 export const CardList: React.FC<CardListProps> = (props) => {
   initializeIcons();
 
-  const { cards, ref, loading } = useMovies({ initialCards: props.cards, page: props.currentPage });
+  const { cards, ref, requestState } = useMovies({
+    initialCards: props.cards,
+    page: props.currentPage,
+  });
 
   return (
     <Stack
@@ -39,7 +42,7 @@ export const CardList: React.FC<CardListProps> = (props) => {
         />
       ))}
 
-      {loading && (
+      {requestState.state === REQUEST_STATE_TYPES.LOADING && (
         <>
           <ShimmerCard />
           <ShimmerCard />

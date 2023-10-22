@@ -11,6 +11,28 @@ type Params = {
   page: number;
 };
 
+export const REQUEST_STATE_TYPES = {
+  LOADING: "loading",
+  ERROR: "error",
+  SUCCESS: "success",
+  NOT_STARTED: "not_started",
+} as const;
+
+export type RequestState =
+  | {
+      state: typeof REQUEST_STATE_TYPES.SUCCESS;
+    }
+  | {
+      state: typeof REQUEST_STATE_TYPES.LOADING;
+    }
+  | {
+      state: typeof REQUEST_STATE_TYPES.ERROR;
+      error: Error;
+    }
+  | {
+      state: typeof REQUEST_STATE_TYPES.NOT_STARTED;
+    };
+
 export const useMovies = ({ initialCards, page }: Params) => {
   const { ref, inView } = useInView({
     threshold: 0,
@@ -18,10 +40,13 @@ export const useMovies = ({ initialCards, page }: Params) => {
 
   const [cards, setCards] = useState<CardType[]>(initialCards);
   const [currentPage, setCurrentPage] = useState<number>(page);
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const [requestState, setRequestState] = useState<RequestState>({
+    state: REQUEST_STATE_TYPES.NOT_STARTED,
+  });
 
   const fetchNextMovies = useCallback(async (page: number) => {
-    setLoading(true);
+    setRequestState({ state: REQUEST_STATE_TYPES.LOADING });
 
     try {
       const movies = /** Mock a long time loading*/ await new Promise<FetchPopularMoviesResponse>(
@@ -33,12 +58,13 @@ export const useMovies = ({ initialCards, page }: Params) => {
         },
       );
       const additionalCards = convertMovieResponseToCard(movies.results);
+
       setCards((prev) => [...prev, ...additionalCards]);
     } catch (error) {
-      console.log("error: ", error);
-      throw error;
-    } finally {
-      setLoading(false);
+      setRequestState({
+        state: REQUEST_STATE_TYPES.ERROR,
+        error: error instanceof Error ? error : new Error(String(error)),
+      });
     }
   }, []);
 
@@ -60,6 +86,6 @@ export const useMovies = ({ initialCards, page }: Params) => {
   return {
     cards,
     ref,
-    loading,
+    requestState,
   };
 };
