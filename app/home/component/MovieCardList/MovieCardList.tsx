@@ -3,23 +3,24 @@
 import React from "react";
 import { Stack, initializeIcons } from "@fluentui/react";
 
-import { CardType, Card } from "../Card/Card";
-
-import { ShimmerCard } from "../Card/ShimmerCard";
-
 import { REQUEST_STATE_TYPES, useMovies } from "../../hooks/useMovies";
+import { MovieCardType, MovieCard } from "../MovieCard/MovieCard";
+import { ShimmerCard } from "../MovieCard/ShimmerCard";
 
-export type CardListProps = {
-  cards: CardType[];
+export type MovieCardListProps = {
+  movieCards: MovieCardType[];
   currentPage: number;
 };
 
-export const CardList: React.FC<CardListProps> = (props) => {
+export const MovieCardList: React.FC<MovieCardListProps> = ({
+  movieCards,
+  currentPage: pageNumber,
+}) => {
   initializeIcons();
 
   const { cards, ref, requestState } = useMovies({
-    initialCards: props.cards,
-    page: props.currentPage,
+    initialCards: movieCards,
+    page: pageNumber,
   });
 
   return (
@@ -32,7 +33,7 @@ export const CardList: React.FC<CardListProps> = (props) => {
       }}
     >
       {cards.map((card, idx) => (
-        <Card
+        <MovieCard
           key={`${card.id}-${idx}`}
           title={card.title}
           imagePath={card.imagePath}

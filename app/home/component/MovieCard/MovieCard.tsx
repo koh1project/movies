@@ -11,9 +11,9 @@ import {
 
 import { type InViewHookResponse } from "react-intersection-observer";
 
-import { CARD_PREVIEW_IMAGE_SIZE_HEIGHT, CARD_PREVIEW_IMAGE_SIZE_WIDTH } from "../../const";
+import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "./utils";
 
-export type CardType = {
+export type MovieCardType = {
   title: string;
   imagePath: string;
   releaseDate: string;
@@ -21,9 +21,13 @@ export type CardType = {
   inViewRef?: InViewHookResponse["ref"];
 };
 
-type CardProps = CardType;
-
-export const Card: React.FC<CardProps> = ({ title, releaseDate, id, imagePath, inViewRef }) => {
+export const MovieCard: React.FC<MovieCardType> = ({
+  title,
+  releaseDate,
+  id,
+  imagePath,
+  inViewRef,
+}) => {
   const theme = getTheme();
 
   return (

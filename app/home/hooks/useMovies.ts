@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { CardType } from "../component/Card/Card";
-import { convertMovieResponseToCard } from "../component/utils";
+import { MovieCardType } from "../component/MovieCard/MovieCard";
+import { convertMovieResponseToCard } from "../component/MovieCard/utils";
 
 import { FetchPopularMoviesResponse, fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 
 type Params = {
-  initialCards: CardType[];
+  initialCards: MovieCardType[];
   page: number;
 };
 
@@ -38,7 +38,7 @@ export const useMovies = ({ initialCards, page }: Params) => {
     threshold: 0,
   });
 
-  const [cards, setCards] = useState<CardType[]>(initialCards);
+  const [cards, setCards] = useState<MovieCardType[]>(initialCards);
   const [currentPage, setCurrentPage] = useState<number>(page);
 
   const [requestState, setRequestState] = useState<RequestState>({
