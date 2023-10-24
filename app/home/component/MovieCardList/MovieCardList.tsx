@@ -9,15 +9,18 @@ import { convertMovieResponseToCard } from "../MovieCard/utils";
 import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 
 export type MovieCardListProps = {
-  cards: MovieCardType[];
+  movieCards: MovieCardType[];
   currentPage: number;
 };
 
-export const MovieCardList: React.FC<MovieCardListProps> = (props) => {
+export const MovieCardList: React.FC<MovieCardListProps> = ({
+  movieCards,
+  currentPage: pageNumber,
+}) => {
   initializeIcons();
 
-  const [cards, setCards] = React.useState<MovieCardType[]>(props.cards);
-  const [currentPage, setCurrentPage] = React.useState<number>(props.currentPage);
+  const [cards, setCards] = React.useState<MovieCardType[]>(movieCards);
+  const [currentPage, setCurrentPage] = React.useState<number>(pageNumber);
 
   // Client fetch test -----------
   const fetchOnClient_DEVELOP = useCallback(async () => {

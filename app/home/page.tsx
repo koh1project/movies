@@ -5,12 +5,12 @@ import { MovieCardListProps, MovieCardList } from "./component/MovieCardList/Mov
 
 export default async function Home() {
   const movies = await fetchPopularMovies({ page: String(1) });
-  const cards: MovieCardListProps["cards"] = convertMovieResponseToCard(movies.results);
+  const movieCards: MovieCardListProps["movieCards"] = convertMovieResponseToCard(movies.results);
 
   return (
     <main>
       <div>
-        <MovieCardList cards={cards} currentPage={movies.page || 0} />
+        <MovieCardList movieCards={movieCards} currentPage={movies.page || 0} />
       </div>
     </main>
   );
