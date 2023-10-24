@@ -5,7 +5,7 @@ import React, { useCallback, useEffect } from "react";
 
 import { CardType, Card } from "../Card/Card";
 
-import { convertMovieResponseToCard } from "../utils";
+import { convertMovieResponseToCard } from "../Card/utils";
 
 import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 

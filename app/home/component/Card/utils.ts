@@ -1,6 +1,6 @@
-import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "../const";
+import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "../../const";
 
-import { CardType } from "./Card/Card";
+import { CardType } from "./Card";
 
 import { PopularMovie } from "@/app/lib/http/movie/movie.service";
 
