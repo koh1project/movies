@@ -60,6 +60,7 @@ export const useMovies = ({ initialCards, page }: Params) => {
       const additionalCards = convertMovieResponseToCard(movies.results);
 
       setCards((prev) => [...prev, ...additionalCards]);
+      setRequestState({ state: REQUEST_STATE_TYPES.SUCCESS });
     } catch (error) {
       setRequestState({
         state: REQUEST_STATE_TYPES.ERROR,
@@ -69,7 +70,7 @@ export const useMovies = ({ initialCards, page }: Params) => {
   }, []);
 
   useEffect(() => {
-    // THe 1st page is set by Server Side Rendering
+    // The 1st page is set by Server Side Rendering
     if (currentPage === 1) {
       return;
     }
@@ -78,6 +79,10 @@ export const useMovies = ({ initialCards, page }: Params) => {
   }, [currentPage]);
 
   useEffect(() => {
+    if (requestState.state === REQUEST_STATE_TYPES.LOADING) {
+      return;
+    }
+
     if (inView) {
       setCurrentPage((prev) => prev + 1);
     }
