@@ -11,14 +11,14 @@ import {
 
 import { CARD_PREVIEW_IMAGE_SIZE_HEIGHT, CARD_PREVIEW_IMAGE_SIZE_WIDTH } from "../../const";
 
-export type CardType = {
+export type MovieCardType = {
   title: string;
   imagePath: string;
   releaseDate: string;
   id: number;
 };
 
-export const Card: React.FC<CardType> = ({ title, releaseDate, id, imagePath }) => {
+export const MovieCard: React.FC<MovieCardType> = ({ title, releaseDate, id, imagePath }) => {
   const theme = getTheme();
 
   return (

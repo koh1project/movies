@@ -1,16 +1,16 @@
 import { fetchPopularMovies } from "../lib/http/movie/movie.service";
 
-import { CardList, CardListProps } from "./component/CardList/CardList";
-import { convertMovieResponseToCard } from "./component/Card/utils";
+import { convertMovieResponseToCard } from "./component/MovieCard/utils";
+import { MovieCardListProps, MovieCardList } from "./component/MovieCardList/MovieCardList";
 
 export default async function Home() {
   const movies = await fetchPopularMovies({ page: String(1) });
-  const cards: CardListProps["cards"] = convertMovieResponseToCard(movies.results);
+  const cards: MovieCardListProps["cards"] = convertMovieResponseToCard(movies.results);
 
   return (
     <main>
       <div>
-        <CardList cards={cards} currentPage={movies.page || 0} />
+        <MovieCardList cards={cards} currentPage={movies.page || 0} />
       </div>
     </main>
   );

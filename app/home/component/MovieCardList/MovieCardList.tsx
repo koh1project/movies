@@ -3,21 +3,20 @@
 import { Stack, initializeIcons } from "@fluentui/react";
 import React, { useCallback, useEffect } from "react";
 
-import { CardType, Card } from "../Card/Card";
-
-import { convertMovieResponseToCard } from "../Card/utils";
+import { MovieCardType, MovieCard } from "../MovieCard/MovieCard";
+import { convertMovieResponseToCard } from "../MovieCard/utils";
 
 import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 
-export type CardListProps = {
-  cards: CardType[];
+export type MovieCardListProps = {
+  cards: MovieCardType[];
   currentPage: number;
 };
 
-export const CardList: React.FC<CardListProps> = (props) => {
+export const MovieCardList: React.FC<MovieCardListProps> = (props) => {
   initializeIcons();
 
-  const [cards, setCards] = React.useState<CardType[]>(props.cards);
+  const [cards, setCards] = React.useState<MovieCardType[]>(props.cards);
   const [currentPage, setCurrentPage] = React.useState<number>(props.currentPage);
 
   // Client fetch test -----------
@@ -45,7 +44,7 @@ export const CardList: React.FC<CardListProps> = (props) => {
       }}
     >
       {cards.map((card) => (
-        <Card
+        <MovieCard
           key={card.id}
           title={card.title}
           imagePath={card.imagePath}
