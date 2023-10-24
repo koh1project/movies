@@ -1,8 +1,9 @@
-import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "../../const";
-
 import { MovieCardType } from "./MovieCard";
 
 import { PopularMovie } from "@/app/lib/http/movie/movie.service";
+
+export const CARD_PREVIEW_IMAGE_SIZE_WIDTH = 300;
+export const CARD_PREVIEW_IMAGE_SIZE_HEIGHT = 300;
 
 export const convertMovieResponseToCard = (movies: PopularMovie[] | undefined): MovieCardType[] => {
   if (movies === undefined) {
