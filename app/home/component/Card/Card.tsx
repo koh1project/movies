@@ -18,9 +18,7 @@ export type CardType = {
   id: number;
 };
 
-type CardProps = CardType;
-
-export const Card: React.FC<CardProps> = ({ title, releaseDate, id, imagePath }) => {
+export const Card: React.FC<CardType> = ({ title, releaseDate, id, imagePath }) => {
   const theme = getTheme();
 
   return (
