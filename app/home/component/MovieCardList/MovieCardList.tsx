@@ -4,7 +4,7 @@ import { Stack, initializeIcons } from "@fluentui/react";
 import React, { useCallback, useEffect } from "react";
 
 import { MovieCardType, MovieCard } from "../MovieCard/MovieCard";
-import { convertMovieResponseToCard } from "../MovieCard/utils";
+import { convertMovieResponseToCard } from "../MovieCard/MovieCard.utils";
 
 import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 

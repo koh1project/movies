@@ -9,7 +9,7 @@ import {
   getTheme,
 } from "@fluentui/react";
 
-import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "./utils";
+import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "./MovieCard.utils";
 
 export type MovieCardType = {
   title: string;
