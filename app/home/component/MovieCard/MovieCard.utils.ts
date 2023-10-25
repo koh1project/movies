@@ -5,6 +5,7 @@ import { PopularMovie } from "@/app/lib/http/movie/movie.service";
 export const CARD_PREVIEW_IMAGE_SIZE_WIDTH = 300;
 export const CARD_PREVIEW_IMAGE_SIZE_HEIGHT = 300;
 
+/** @description Should be separate from client component file so that server components can use it */
 export const convertMovieResponseToCard = (movies: PopularMovie[] | undefined): MovieCardType[] => {
   if (movies === undefined) {
     return [];
