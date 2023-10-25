@@ -11,7 +11,7 @@ import {
 
 import { type InViewHookResponse } from "react-intersection-observer";
 
-import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "./utils";
+import { CARD_PREVIEW_IMAGE_SIZE_WIDTH, CARD_PREVIEW_IMAGE_SIZE_HEIGHT } from "./MovieCard.utils";
 
 export type MovieCardType = {
   title: string;

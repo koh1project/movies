@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { MovieCardType } from "../component/MovieCard/MovieCard";
-import { convertMovieResponseToCard } from "../component/MovieCard/utils";
+import { convertMovieResponseToCard } from "../component/MovieCard/MovieCard.utils";
 
 import { FetchPopularMoviesResponse, fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
 
