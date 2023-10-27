@@ -1,12 +1,11 @@
 "use client";
 
+import React from "react";
 import { Stack, initializeIcons } from "@fluentui/react";
-import React, { useCallback, useEffect } from "react";
 
+import { REQUEST_STATE_TYPES, useMovies } from "../../hooks/useMovies";
 import { MovieCardType, MovieCard } from "../MovieCard/MovieCard";
-import { convertMovieResponseToCard } from "../MovieCard/MovieCard.utils";
-
-import { fetchPopularMovies } from "@/app/lib/http/movie/movie.service";
+import { ShimmerCard } from "../MovieCard/ShimmerCard";
 
 export type MovieCardListProps = {
   movieCards: MovieCardType[];
@@ -19,23 +18,10 @@ export const MovieCardList: React.FC<MovieCardListProps> = ({
 }) => {
   initializeIcons();
 
-  const [cards, setCards] = React.useState<MovieCardType[]>(movieCards);
-  const [currentPage, setCurrentPage] = React.useState<number>(pageNumber);
-
-  // Client fetch test -----------
-  const fetchOnClient_DEVELOP = useCallback(async () => {
-    const nextPage = currentPage + 1;
-    const movies = await fetchPopularMovies({ page: String(nextPage) });
-    const additionalCards = convertMovieResponseToCard(movies.results);
-
-    setCards([...cards, ...additionalCards]);
-    setCurrentPage(nextPage);
-  }, []);
-
-  useEffect(() => {
-    setTimeout(fetchOnClient_DEVELOP, 3000);
-  }, []);
-  // Client fetch test -----------
+  const { cards, ref, requestState } = useMovies({
+    initialCards: movieCards,
+    page: pageNumber,
+  });
 
   return (
     <Stack
@@ -46,15 +32,24 @@ export const MovieCardList: React.FC<MovieCardListProps> = ({
         childrenGap: 20,
       }}
     >
-      {cards.map((card) => (
+      {cards.map((card, idx) => (
         <MovieCard
-          key={card.id}
+          key={`${card.id}-${idx}`}
           title={card.title}
           imagePath={card.imagePath}
           releaseDate={card.releaseDate}
           id={card.id}
+          inViewRef={idx === cards.length - 1 ? ref : undefined}
         />
       ))}
+
+      {requestState.state === REQUEST_STATE_TYPES.LOADING && (
+        <>
+          <ShimmerCard />
+          <ShimmerCard />
+          <ShimmerCard />
+        </>
+      )}
     </Stack>
   );
 };
