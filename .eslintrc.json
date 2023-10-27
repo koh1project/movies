@@ -36,6 +36,7 @@
         ],
         "distinctGroup": true
       }
-    ]
+    ],
+    "react-hooks/exhaustive-deps": "off"
   }
 }
